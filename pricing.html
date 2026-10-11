@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pricing — Jambla Investments</title>
+<meta name="description" content="Simple, transparent internet pricing for homes and businesses in Kisumu.">
+<style>
+/* ============================================
+   Jambla Investments — core stylesheet
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+
+:root{
+  /* light theme: surfaces */
+  --bg:         #FAF7F1;
+  --bg-alt:     #F1EBDF;
+  --bg-raised:  #FFFFFF;
+  /* brand */
+  --orange:     #FF5A1F;
+  --amber:      #FFB338;
+  --orange-ink: #D4420A;   /* orange when used as text on light */
+  --amber-ink:  #9A5800;   /* amber when used as text on light */
+  /* text + lines */
+  --text:       #1F1A14;
+  --text-soft:  #5A5247;
+  --text-faint: #7A7164;
+  --line:       #E4DBCB;
+
+  --display: 'Big Shoulders Display', sans-serif;
+  --body: 'Inter', sans-serif;
+
+  --max: 1180px;
+  --nav-h: 68px;   /* measured live by JS */
+}
+
+*, *::before, *::after{ box-sizing: border-box; }
+
+html{ scroll-behavior: smooth; }
+
+body{
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--body);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+img{ max-width: 100%; display: block; }
+
+a{ color: inherit; text-decoration: none; }
+
+.wrap{
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 28px;
+}
+
+h1, h2, h3, h4{
+  font-family: var(--display);
+  font-weight: 700;
+  line-height: 0.98;
+  margin: 0;
+  color: var(--text);
+  letter-spacing: 0.2px;
+}
+
+h1{ font-size: clamp(44px, 7vw, 84px); font-weight: 800; }
+h2{ font-size: clamp(32px, 4.2vw, 52px); }
+h3{ font-size: clamp(22px, 2.6vw, 28px); font-weight: 600; }
+
+p{ margin: 0 0 1em; color: var(--text-soft); max-width: 62ch; }
+
+.lede{
+  font-size: 19px;
+  color: var(--text-soft);
+}
+
+/* focus visibility */
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible{
+  outline: 2px solid var(--orange-ink);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce){
+  *{ animation: none !important; transition: none !important; }
+  html{ scroll-behavior: auto; }
+}
+
+/* ---------- buttons ---------- */
+.btn{
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 26px;
+  font-family: var(--body);
+  font-weight: 600;
+  font-size: 15px;
+  border-radius: 3px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: transform .15s ease, background .15s ease, border-color .15s ease;
+}
+.btn-primary{
+  background: var(--orange);
+  color: #1B1712;
+}
+.btn-primary:hover{ background: var(--amber); transform: translateY(-1px); }
+
+.btn-ghost{
+  background: transparent;
+  border-color: var(--line);
+  color: var(--text);
+}
+.btn-ghost:hover{ border-color: var(--orange); color: var(--orange-ink); }
+
+/* ---------- top nav ---------- */
+.site-header{
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(250, 247, 241, 0.92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+}
+.nav{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 28px;
+  max-width: var(--max);
+  margin: 0 auto;
+}
+.brand{
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 24px;
+  letter-spacing: 0.5px;
+}
+.brand-dot{
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: var(--orange);
+  box-shadow: 0 0 0 4px rgba(255,90,31,0.18);
+}
+.brand small{
+  display:block;
+  font-family: var(--body);
+  font-weight: 500;
+  font-size: 10.5px;
+  letter-spacing: 1.5px;
+  color: var(--text-faint);
+}
+
+.nav-links{
+  display: flex;
+  gap: 34px;
+  list-style: none;
+  margin: 0; padding: 0;
+}
+.nav-links a{
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-soft);
+  padding-bottom: 4px;
+  border-bottom: 2px solid transparent;
+  transition: color .15s ease, border-color .15s ease;
+}
+.nav-links a:hover{ color: var(--text); }
+.nav-links a.active{
+  color: var(--text);
+  border-bottom-color: var(--orange);
+}
+
+.nav-cta{ display:flex; align-items:center; gap:20px; }
+.nav-phone{
+  font-size: 14px;
+  color: var(--text-soft);
+  display: none;
+}
+.nav-toggle{
+  display: none;
+  background: none;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  padding: 8px 10px;
+  color: var(--text);
+  cursor: pointer;
+}
+
+@media (min-width: 720px){
+  .nav-phone{ display: inline; }
+}
+
+@media (max-width: 860px){
+  .nav-links{
+    position: fixed;
+    inset: var(--nav-h) 0 0 0;
+    overflow-y: auto;
+    background: var(--bg);
+    flex-direction: column;
+    padding: 30px 28px;
+    gap: 24px;
+    border-top: 1px solid var(--line);
+    transform: translateY(-8px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .18s ease, transform .18s ease;
+  }
+  .nav-links.open{
+    opacity: 1; transform: translateY(0); pointer-events: auto;
+  }
+  .nav-links a{ font-size: 20px; }
+  .nav-toggle{ display: inline-flex; }
+}
+
+/* ---------- hero ---------- */
+.hero{
+  padding: 84px 0 96px;
+  border-bottom: 1px solid var(--line);
+  position: relative;
+  overflow: hidden;
+}
+.hero .wrap{
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 48px;
+  align-items: center;
+}
+.hero-eyebrow{
+  display:flex; align-items:center; gap:10px;
+  color: var(--amber-ink);
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 18px;
+}
+.hero-eyebrow .rule{ width: 30px; height: 1px; background: var(--amber); }
+
+.hero h1{ margin-bottom: 22px; }
+.hero h1 .accent{ color: var(--orange-ink); }
+
+.hero-actions{ display:flex; gap:16px; margin-top: 32px; flex-wrap: wrap; }
+
+.hero-stats{
+  display: flex;
+  gap: 36px;
+  margin-top: 52px;
+  padding-top: 28px;
+  border-top: 1px solid var(--line);
+}
+.stat b{
+  display:block;
+  font-family: var(--display);
+  font-size: 34px;
+  color: var(--text);
+  font-weight: 700;
+}
+.stat span{ font-size: 13px; color: var(--text-faint); }
+
+.hero-art{ width: 100%; }
+
+@media (max-width: 900px){
+  .hero .wrap{ grid-template-columns: 1fr; }
+  .hero-art{ order: -1; max-width: 360px; margin: 0 auto 12px; }
+}
+
+/* ---------- section scaffolding ---------- */
+.section{ padding: 96px 0; border-bottom: 1px solid var(--line); }
+.section-head{
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 24px;
+  margin-bottom: 56px;
+  flex-wrap: wrap;
+}
+.section-head .tag{
+  color: var(--amber-ink);
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  display:block;
+}
+.section-alt{ background: var(--bg-alt); }
+
+/* ---------- coverage strip ---------- */
+.coverage-strip{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 20px;
+}
+.coverage-strip span{
+  border: 1px solid var(--line);
+  color: var(--text-soft);
+  font-size: 13.5px;
+  padding: 7px 14px;
+  border-radius: 3px;
+}
+
+/* ---------- service rows (alternating, no card-shadow kit) ---------- */
+.service-row{
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 56px;
+  align-items: center;
+  padding: 48px 0;
+  border-top: 1px solid var(--line);
+}
+.service-row:first-of-type{ border-top: none; padding-top: 0; }
+.service-row:nth-of-type(even){ direction: rtl; }
+.service-row:nth-of-type(even) > *{ direction: ltr; }
+
+.service-num{
+  font-family: var(--display);
+  font-size: 15px;
+  color: var(--text-faint);
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+  display: block;
+}
+.service-row h3{ margin-bottom: 14px; }
+.service-list{ list-style:none; padding:0; margin: 18px 0 0; }
+.service-list li{
+  padding-left: 20px;
+  position: relative;
+  color: var(--text-soft);
+  font-size: 15px;
+  margin-bottom: 9px;
+}
+.service-list li::before{
+  content: '';
+  position: absolute;
+  left: 0; top: 8px;
+  width: 8px; height: 2px;
+  background: var(--orange);
+}
+
+.service-visual{
+  aspect-ratio: 4/3;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: var(--bg-raised);
+  display:flex; align-items:center; justify-content:center;
+  overflow:hidden;
+}
+
+@media (max-width: 800px){
+  .service-row, .service-row:nth-of-type(even){
+    grid-template-columns: 1fr;
+    direction: ltr;
+  }
+}
+
+/* ---------- process steps (legitimate sequence) ---------- */
+.steps{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  margin-top: 12px;
+}
+.step{
+  padding: 0 24px 0 0;
+  border-left: 1px solid var(--line);
+  padding-left: 24px;
+}
+.step:first-child{ border-left: none; padding-left: 0; }
+.step-index{
+  font-family: var(--display);
+  font-size: 42px;
+  color: var(--orange-ink);
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 14px;
+}
+.step h4{ font-size: 18px; margin-bottom: 8px; }
+.step p{ font-size: 14.5px; }
+
+@media (max-width: 860px){
+  .steps{ grid-template-columns: 1fr; gap: 32px; }
+  .step{ border-left: none; padding-left: 0; border-top: 1px solid var(--line); padding-top: 24px; }
+  .step:first-child{ border-top: none; padding-top: 0; }
+}
+
+/* ---------- pricing spec sheet ---------- */
+.plans{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.plan{
+  padding: 34px 26px;
+  border-left: 1px solid var(--line);
+  position: relative;
+}
+.plan:first-child{ border-left: none; }
+.plan.popular{
+  border-left: 3px solid var(--orange);
+  background: var(--bg-raised);
+}
+.plan-badge{
+  position: absolute;
+  top: 0; right: 0;
+  background: var(--orange);
+  color: #1B1712;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  padding: 5px 10px;
+}
+.plan-name{
+  font-family: var(--display);
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.plan-speed{ color: var(--amber-ink); font-size: 14px; margin-bottom: 22px; }
+.plan-price{
+  font-family: var(--display);
+  font-size: 40px;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 2px;
+}
+.plan-price sup{ font-size: 16px; font-weight: 600; color: var(--text-soft); margin-right: 2px;}
+.plan-cycle{ font-size: 13px; color: var(--text-faint); margin-bottom: 26px; }
+.plan-feats{ list-style:none; padding:0; margin: 0 0 28px; }
+.plan-feats li{
+  font-size: 14px;
+  color: var(--text-soft);
+  padding: 9px 0;
+  border-top: 1px solid var(--line);
+}
+.plan-feats li:first-child{ border-top: none; }
+.plan .btn{ width: 100%; justify-content: center; }
+
+@media (max-width: 980px){
+  .plans{ grid-template-columns: 1fr 1fr; }
+  .plan{ border-left: 1px solid var(--line); border-top: 1px solid var(--line); }
+  .plan:nth-child(odd){ border-left: none; }
+  .plan:nth-child(-n+2){ border-top: none; }
+}
+@media (max-width: 620px){
+  .plans{ grid-template-columns: 1fr; }
+  .plan{ border-left: none !important; border-top: 1px solid var(--line); }
+  .plan:first-child{ border-top: none; }
+}
+
+/* ---------- add-ons / IT support cards (deliberate, sparse) ---------- */
+.addons{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+.addon{
+  background: var(--bg);
+  padding: 30px;
+}
+.addon h4{ font-size: 18px; margin-bottom: 10px; }
+.addon .price{ color: var(--orange-ink); font-family: var(--display); font-size: 24px; font-weight: 700; margin-bottom: 10px; }
+.addon p{ font-size: 14px; margin-bottom: 0; }
+
+@media (max-width: 780px){
+  .addons{ grid-template-columns: 1fr; }
+}
+
+/* ---------- FAQ ---------- */
+.faq-item{
+  border-top: 1px solid var(--line);
+  padding: 24px 0;
+}
+.faq-item:last-child{ border-bottom: 1px solid var(--line); }
+.faq-item summary{
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--display);
+  font-size: 19px;
+  font-weight: 600;
+  color: var(--text);
+}
+.faq-item summary::-webkit-details-marker{ display:none; }
+.faq-item summary::after{
+  content: '+';
+  color: var(--orange-ink);
+  font-size: 24px;
+  font-weight: 400;
+  flex-shrink: 0;
+  margin-left: 20px;
+}
+.faq-item[open] summary::after{ content: '–'; }
+.faq-item p{ margin-top: 14px; font-size: 15px; }
+
+/* ---------- CTA band ---------- */
+.cta-band{
+  background: linear-gradient(120deg, var(--bg-raised), var(--bg-alt));
+  border-bottom: 1px solid var(--line);
+  padding: 72px 0;
+}
+.cta-band .wrap{
+  display:flex;
+  align-items:center;
+  justify-content: space-between;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+.cta-band h2{ max-width: 560px; }
+
+/* ---------- contact ---------- */
+.contact-grid{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+}
+.contact-info dl{ margin: 28px 0; }
+.contact-info dt{
+  font-size: 12.5px;
+  letter-spacing: 1px;
+  color: var(--text-faint);
+  margin-bottom: 4px;
+}
+.contact-info dd{
+  margin: 0 0 22px;
+  font-size: 16px;
+  color: var(--text);
+}
+.contact-info dd a:hover{ color: var(--orange-ink); }
+
+.map-frame{
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  overflow: hidden;
+  aspect-ratio: 4/3;
+}
+.map-frame iframe{ width:100%; height:100%; border:0; filter: grayscale(0.2) contrast(0.95); }
+
+.field{ margin-bottom: 20px; }
+.field label{
+  display:block;
+  font-size: 13px;
+  color: var(--text-soft);
+  margin-bottom: 8px;
+}
+.field input, .field select, .field textarea{
+  width: 100%;
+  background: var(--bg-raised);
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  padding: 13px 14px;
+  color: var(--text);
+  font-family: var(--body);
+  font-size: 15px;
+}
+.field textarea{ resize: vertical; min-height: 110px; }
+.field input:focus, .field select:focus, .field textarea:focus{
+  border-color: var(--orange);
+}
+.form-row{ display:grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.form-note{ font-size: 13px; color: var(--text-faint); margin-top: 14px; }
+#form-status{ font-size: 14px; margin-top: 16px; display:none; }
+#form-status.show{ display:block; }
+#form-status.ok{ color: var(--amber-ink); }
+
+@media (max-width: 860px){
+  .contact-grid{ grid-template-columns: 1fr; gap: 44px; }
+  .form-row{ grid-template-columns: 1fr; }
+}
+
+/* ---------- footer ---------- */
+.site-footer{ padding: 56px 0 40px; }
+.footer-top{
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1fr;
+  gap: 40px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--line);
+}
+.footer-top h4{
+  font-size: 12.5px;
+  letter-spacing: 1px;
+  color: var(--text-faint);
+  font-family: var(--body);
+  font-weight: 600;
+  margin-bottom: 18px;
+}
+.footer-top ul{ list-style:none; margin:0; padding:0; }
+.footer-top li{ margin-bottom: 11px; }
+.footer-top a{ color: var(--text-soft); font-size: 14.5px; }
+.footer-top a:hover{ color: var(--orange-ink); }
+.footer-bottom{
+  display:flex;
+  justify-content: space-between;
+  align-items:center;
+  padding-top: 28px;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: 13px;
+  color: var(--text-faint);
+}
+
+@media (max-width: 780px){
+  .footer-top{ grid-template-columns: 1fr 1fr; }
+}
+
+/* ---------- page hero (inner pages, shorter) ---------- */
+.page-hero{
+  padding: 64px 0 56px;
+  border-bottom: 1px solid var(--line);
+}
+.page-hero .tag{ color: var(--amber-ink); font-size: 14px; font-weight: 600; margin-bottom: 14px; display:block; }
+.page-hero p{ margin-top: 16px; font-size: 18px; }
+
+/* utility */
+.center{ text-align:center; }
+.mt-lg{ margin-top: 48px; }
+
+
+/* ============================================
+   Scroll-away header + mobile refinements
+   ============================================ */
+
+.site-header{
+  transition: transform .28s ease;
+  will-change: transform;
+}
+.site-header.nav-hidden{ transform: translateY(-100%); }
+
+@media (prefers-reduced-motion: reduce){
+  .site-header{ transition: none; }
+}
+
+/* stop the page scrolling behind the open mobile menu */
+body.menu-open{ overflow: hidden; }
+
+/* ---------- tablets ---------- */
+@media (max-width: 860px){
+  .hero{ padding: 64px 0 72px; }
+  .section{ padding: 72px 0; }
+  .cta-band{ padding: 56px 0; }
+  .site-footer{ padding: 44px 0 32px; }
+
+  /* 16px keeps iOS from zooming in when a field is focused */
+  .field input, .field select, .field textarea{ font-size: 16px; }
+}
+
+/* ---------- phones ---------- */
+@media (max-width: 600px){
+  .wrap{ padding: 0 20px; }
+
+  .nav{ padding: 14px 20px; }
+  .brand{ font-size: 21px; }
+  .nav-cta{ gap: 10px; }
+  .nav-cta .btn{ padding: 11px 15px; font-size: 13.5px; }
+
+  h1{ font-size: clamp(34px, 9vw, 52px); }
+  h2{ font-size: clamp(27px, 7.4vw, 40px); }
+  h3{ font-size: clamp(20px, 5.4vw, 26px); }
+  h1, h2, h3, h4{ overflow-wrap: break-word; }
+
+  .lede{ font-size: 17px; }
+
+  .hero{ padding: 48px 0 60px; }
+  .hero-stats{ flex-wrap: wrap; gap: 22px 28px; margin-top: 38px; }
+  .stat{ flex: 1 1 40%; }
+  .stat b{ font-size: 28px; }
+
+  .section{ padding: 56px 0; }
+  .section-head{ margin-bottom: 38px; }
+
+  .service-row{ padding: 36px 0; gap: 28px; }
+
+  .plan{ padding: 28px 22px; }
+  .addon{ padding: 24px; }
+
+  .contact-grid{ gap: 34px; }
+  .map-frame{ aspect-ratio: 1 / 1; }
+
+  .cta-band{ padding: 48px 0; }
+
+  .footer-top{ grid-template-columns: 1fr; gap: 30px; padding-bottom: 32px; }
+  .footer-bottom{ justify-content: flex-start; }
+
+  .mt-lg{ margin-top: 34px; }
+}
+
+/* ---------- small phones: full-width buttons ---------- */
+@media (max-width: 480px){
+  .hero-actions{ gap: 12px; }
+  .hero-actions .btn,
+  .cta-band .btn{ width: 100%; justify-content: center; }
+}
+
+/* ============================================
+   Light theme extras + illustration slots
+   ============================================ */
+
+/* footer and CTA band stay dark, as an anchor for the light page */
+.site-footer, .cta-band{
+  --bg:         #1B1712;
+  --bg-alt:     #120F0C;
+  --bg-raised:  #241F18;
+  --text:       #F6F1E7;
+  --text-soft:  #B3A99A;
+  --text-faint: #8A8070;
+  --line:       #35301F;
+  --orange-ink: #FF7A45;
+  --amber-ink:  #FFB338;
+}
+.site-footer{ background: var(--bg); color: var(--text); }
+
+/* illustrations fill their frame */
+.service-visual{ background: none; }
+.service-visual svg{ width: 100%; height: 100%; display: block; }
+.hero-art svg{ display: block; width: 100%; height: auto; border: 1px solid var(--line); border-radius: 9px; }
+
+/* narrow phones: keep the header on one line */
+@media (max-width: 420px){
+  .brand small{ display: none; }
+  .nav-cta .btn{ white-space: nowrap; }
+}
+
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <nav class="nav">
+    <a href="index.html" class="brand"><span class="brand-dot"></span>JAMBLA<small>INVESTMENTS</small></a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="pricing.html" class="active">Pricing</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-cta">
+      <span class="nav-phone">+254 700 123 456</span>
+      <a href="contact.html" class="btn btn-primary">Get connected</a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+    </div>
+  </nav>
+</header>
+
+<main>
+
+  <section class="page-hero">
+    <div class="wrap">
+      <span class="tag">PRICING</span>
+      <h1>No hidden fees.<br>No surprise caps.</h1>
+      <p>Every plan includes a router, free standard installation within our coverage area, and Kisumu-based support. Prices are in Kenyan shillings.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+
+      <div class="section-head">
+        <div>
+          <span class="tag">HOME PLANS</span>
+          <h2>Pick a speed that fits<br>your household.</h2>
+        </div>
+        <p>Not sure what speed you need? 10 Mbps comfortably handles browsing and one HD stream; 20 Mbps+ is built for multiple devices and video calls.</p>
+      </div>
+
+      <div class="plans">
+        <div class="plan">
+          <div class="plan-name">Basic</div>
+          <div class="plan-speed">5 Mbps unlimited</div>
+          <div class="plan-price"><sup>KSh</sup>1,999</div>
+          <div class="plan-cycle">per month</div>
+          <ul class="plan-feats">
+            <li>Good for browsing &amp; social media</li>
+            <li>1–2 connected devices</li>
+            <li>Free standard installation</li>
+            <li>Email support</li>
+          </ul>
+          <a href="contact.html" class="btn btn-ghost">Choose Basic</a>
+        </div>
+
+        <div class="plan popular">
+          <div class="plan-badge">MOST POPULAR</div>
+          <div class="plan-name">Home Plus</div>
+          <div class="plan-speed">10 Mbps unlimited</div>
+          <div class="plan-price"><sup>KSh</sup>2,999</div>
+          <div class="plan-cycle">per month</div>
+          <ul class="plan-feats">
+            <li>HD streaming on 1–2 screens</li>
+            <li>Up to 6 connected devices</li>
+            <li>Free standard installation</li>
+            <li>Phone &amp; WhatsApp support</li>
+          </ul>
+          <a href="contact.html" class="btn btn-primary">Choose Home Plus</a>
+        </div>
+
+        <div class="plan">
+          <div class="plan-name">Home Pro</div>
+          <div class="plan-speed">20 Mbps unlimited</div>
+          <div class="plan-price"><sup>KSh</sup>4,499</div>
+          <div class="plan-cycle">per month</div>
+          <ul class="plan-feats">
+            <li>4K streaming &amp; gaming</li>
+            <li>Up to 12 connected devices</li>
+            <li>Free standard installation</li>
+            <li>Priority phone support</li>
+          </ul>
+          <a href="contact.html" class="btn btn-ghost">Choose Home Pro</a>
+        </div>
+
+        <div class="plan">
+          <div class="plan-name">Business</div>
+          <div class="plan-speed">30 Mbps unlimited</div>
+          <div class="plan-price"><sup>KSh</sup>7,999</div>
+          <div class="plan-cycle">per month</div>
+          <ul class="plan-feats">
+            <li>Static IP available (+KSh 1,000/mo)</li>
+            <li>Service level agreement</li>
+            <li>Priority fault response</li>
+            <li>Remote IT support included</li>
+          </ul>
+          <a href="contact.html" class="btn btn-ghost">Choose Business</a>
+        </div>
+      </div>
+
+      <p class="form-note" style="margin-top:24px;">Need more than 30 Mbps, multiple office branches, or a custom SLA? <a href="contact.html" style="color: var(--orange-ink);">Talk to us about an Enterprise plan.</a></p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <span class="tag">ONE-OFF SERVICES</span>
+          <h2>WiFi installation &amp; IT support pricing.</h2>
+        </div>
+      </div>
+      <div class="addons">
+        <div class="addon">
+          <h4>WiFi installation</h4>
+          <div class="price">Free</div>
+          <p>Included with every new internet plan — site survey, router setup, and one access point.</p>
+        </div>
+        <div class="addon">
+          <h4>Extra mesh unit</h4>
+          <div class="price">KSh 2,500</div>
+          <p>One-time cost per additional access point for large homes or offices.</p>
+        </div>
+        <div class="addon">
+          <h4>On-site IT visit</h4>
+          <div class="price">KSh 1,500</div>
+          <p>For customers without a business plan. Waived for active business accounts.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <span class="tag">FAQ</span>
+          <h2>Pricing questions,<br>answered.</h2>
+        </div>
+      </div>
+
+      <details class="faq-item">
+        <summary>Is there a contract or can I pay month-to-month?</summary>
+        <p>All home plans are month-to-month with no lock-in contract. Business plans with a static IP or SLA typically run on a 12-month agreement.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Is installation really free?</summary>
+        <p>Standard installation is free within our existing coverage areas. If your location needs extra cabling or a new tower link, we'll quote that separately before starting work.</p>
+      </details>
+      <details class="faq-item">
+        <summary>What happens if I go over my data?</summary>
+        <p>You won't — all plans listed are unlimited data. Speed, not data volume, is what changes between plans.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Can I upgrade or downgrade my plan later?</summary>
+        <p>Yes. Plan changes take effect from your next billing cycle, and there's no fee to switch.</p>
+      </details>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="wrap">
+      <h2>Tell us your location and we'll confirm the best plan.</h2>
+      <a href="contact.html" class="btn btn-primary">Get a free quote</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div>
+        <a href="index.html" class="brand"><span class="brand-dot"></span>JAMBLA<small>INVESTMENTS</small></a>
+        <p style="margin-top:16px; font-size:14.5px;">Fibre and wireless internet, WiFi and CCTV installation, and IT support for Kisumu homes and businesses.</p>
+      </div>
+      <div>
+        <h4>COMPANY</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="pricing.html">Pricing</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>SERVICES</h4>
+        <ul>
+          <li><a href="services.html">Home internet</a></li>
+          <li><a href="services.html">Business internet</a></li>
+          <li><a href="services.html">WiFi installation</a></li>
+          <li><a href="services.html">CCTV installation</a></li>
+          <li><a href="services.html">IT support</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>CONTACT</h4>
+        <ul>
+          <li><a href="tel:+254700123456">+254 700 123 456</a></li>
+          <li><a href="mailto:hello@jamblainvestments.co.ke">hello@jamblainvestments.co.ke</a></li>
+          <li><a href="contact.html">Oginga Odinga St, Kisumu</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Jambla Investments. All rights reserved.</span>
+      <span>Kisumu, Kenya</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Jambla Investments — shared site behaviour
+
+document.addEventListener('DOMContentLoaded', function () {
+
+  var header = document.querySelector('.site-header');
+  var toggle = document.querySelector('.nav-toggle');
+  var links = document.querySelector('.nav-links');
+
+  // Keep --nav-h matched to the real header height, so the mobile menu
+  // panel always starts exactly below the bar instead of a guessed 66px.
+  function measureHeader() {
+    if (!header) return;
+    document.documentElement.style.setProperty('--nav-h', header.offsetHeight + 'px');
+  }
+  measureHeader();
+  window.addEventListener('resize', measureHeader);
+  window.addEventListener('orientationchange', measureHeader);
+
+  // Mobile nav toggle
+  function closeMenu() {
+    if (!links) return;
+    links.classList.remove('open');
+    document.body.classList.remove('menu-open');
+    if (toggle) toggle.setAttribute('aria-expanded', 'false');
+  }
+
+  if (toggle && links) {
+    toggle.addEventListener('click', function () {
+      var isOpen = links.classList.toggle('open');
+      document.body.classList.toggle('menu-open', isOpen);
+      toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      if (isOpen && header) header.classList.remove('nav-hidden');
+    });
+    links.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', closeMenu);
+    });
+  }
+
+  // Hide the header when scrolling down, bring it back on scroll up.
+  var lastY = window.pageYOffset || document.documentElement.scrollTop;
+  var ticking = false;
+  var DELTA = 6; // ignore tiny jitter / iOS rubber-banding
+
+  function update() {
+    ticking = false;
+    if (!header) return;
+
+    var y = window.pageYOffset || document.documentElement.scrollTop;
+    if (y < 0) y = 0;
+
+    // never hide while the mobile menu is open
+    if (links && links.classList.contains('open')) { lastY = y; return; }
+
+    if (y <= header.offsetHeight) {
+      header.classList.remove('nav-hidden');
+    } else if (y > lastY + DELTA) {
+      header.classList.add('nav-hidden');
+    } else if (y < lastY - DELTA) {
+      header.classList.remove('nav-hidden');
+    }
+    lastY = y;
+  }
+
+  window.addEventListener('scroll', function () {
+    if (!ticking) {
+      window.requestAnimationFrame(update);
+      ticking = true;
+    }
+  }, { passive: true });
+
+  // Contact form (front-end only — no backend wired up yet)
+  var form = document.getElementById('contact-form');
+  var status = document.getElementById('form-status');
+  if (form && status) {
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var name = form.querySelector('#name').value.trim();
+      if (!name) return;
+      status.textContent = 'Thanks, ' + name.split(' ')[0] + ' — we\'ve received your request and will call you back within one business day.';
+      status.classList.add('show', 'ok');
+      form.reset();
+    });
+  }
+
+  // Pricing: highlight monthly/annual toggle if present
+  var cycleToggle = document.getElementById('cycle-toggle');
+  if (cycleToggle) {
+    var prices = document.querySelectorAll('[data-monthly][data-annual]');
+    cycleToggle.addEventListener('change', function () {
+      var annual = cycleToggle.checked;
+      prices.forEach(function (el) {
+        el.textContent = annual ? el.dataset.annual : el.dataset.monthly;
+      });
+      document.querySelectorAll('.plan-cycle').forEach(function(el){
+        el.textContent = annual ? 'per month, billed annually' : 'per month';
+      });
+    });
+  }
+});
+
+</script>
+</body>
+</html>
